@@ -15,18 +15,19 @@ return new class extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
             $table->string('name')->unique();
-            $table->string('lable');
+            $table->string('label');
             $table->timestamps();
         });
 
         Schema::create('permissions', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
             $table->string('name')->unique();
-            $table->string('lable');
+            $table->string('label');
             $table->timestamps();
         });
 
-        Schema::create('permissions', function (Blueprint $table) {
+
+        Schema::create('role_permissions', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
             $table->uuid('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->uuid('permission_id')->references('id')->on('permissions')->onDelete('cascade');
